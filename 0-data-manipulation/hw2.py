@@ -36,11 +36,6 @@ print(data.describe().T)
 print("Data Types")
 print(data.dtypes)
 
-# data = data.drop(['Column1'], axis=1)
-# data = data.drop(['Column2'], axis=1)
-# data = data.drop(['Column3'], axis=1)
-# data = data.drop(['Column4'], axis=1)
-
 data = data.dropna(axis=1, how='all')
 # data = data.dropna(inplace=True)
 
@@ -70,14 +65,12 @@ for x in cat_cols:
         nr_data[x] = nr_data[x].astype('category')
         nr_data[x] = nr_data[x].cat.codes
 
-# nr_data = data[['num_reactions', 'num_comments', 'num_shares', 'num_likes', 'num_loves', 'num_wows', 'num_hahas', 'num_sads', 'num_angrys']]
 # scaler = StandardScaler()
 # print(nr_data.tail())
 # scaler = Normalizer()
 scaler = MinMaxScaler()
 scaled_data = scaler.fit_transform(nr_data)
 # scaled_df = pd.DataFrame(scaled_data, columns=nr_data.columns)
-# print(scaled_df.head())
 
 
 wcss = []
@@ -96,7 +89,3 @@ plt.show()
 kmeans = KMeans(n_clusters=2, init='k-means++', random_state=42)
 identified_clusters = kmeans.fit_predict(scaled_data)
 print("\n\nIdentified Clusters", identified_clusters)
-# data_with_clusters = data.copy()
-# data_with_clusters['Clusters'] = identified_clusters
-# plt.scatter(data_with_clusters['num_reactions'],data_with_clusters['num_comments'],data_with_clusters['num_shares'],data_with_clusters['num_likes'],c=kmeans.labels_,cmap='rainbow')
-# plt.scatter(x, y, )
